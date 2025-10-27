@@ -54,11 +54,16 @@ public class Automaton
         // based on the state of its two neighbors.
         for(int i = 0; i < state.length; i++) {
             int right = i + 1 <state.length? state[i+1] : 0;
-            nextState[i] = (left + center + right) % 2;
             left = center;
             center = right;
+            nextState[i] = calculateNextState(left, center, right);
         }
         state = nextState;
+    }
+    
+    private int calculateNextState(int left, int center, int right)
+    {
+        return (left + center + right) % 2;
     }
     
     /**
